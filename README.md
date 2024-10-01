@@ -1,1 +1,2 @@
 # Mindcare-Hackthon# Snipetters
+# Snipetters
