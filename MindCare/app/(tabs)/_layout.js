@@ -39,6 +39,17 @@ export default function RootLayout() {
         }}
       />
       <Tabs.Screen
+        name="rewards"
+        options={{
+          headerShown: false,
+          title: "Rewards",
+          tabBarIcon: ({ color }) => (
+            <AntDesign name="QQ" size={24} color={color} />
+          ),
+        }}
+      />
+      
+      <Tabs.Screen
         name="Profile"
         options={{
           title: "Profile",
@@ -47,8 +58,6 @@ export default function RootLayout() {
           ),
         }}
       />
-
-      
     </Tabs>
     </ProtectedRoute>
   );
