@@ -4,6 +4,7 @@ import AntDesign from '@expo/vector-icons/AntDesign';
 import ProtectedRoute from "/workspaces/Mindcare-Hackthon/MindCare/components/ProtectRoute.js";
 import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
 import Fontisto from '@expo/vector-icons/Fontisto';
+import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
 
 export default function RootLayout() {
   return (
@@ -13,7 +14,7 @@ export default function RootLayout() {
         name="index"
         options={{
           headerShown: false,
-          title: "chat",
+          title: "",
           tabBarIcon: ({ color }) => (
             <AntDesign name="QQ" size={24} color={color} />
           ),
@@ -22,7 +23,7 @@ export default function RootLayout() {
       <Tabs.Screen
         name="BinauralBeats"
         options={{
-          title: "Binaural Beats",
+          title: "",
           tabBarIcon: ({ color }) => (
             <Fontisto name="heartbeat-alt" size={24} color={color} />
           ),
@@ -32,23 +33,24 @@ export default function RootLayout() {
       <Tabs.Screen
         name="Diet"
         options={{
-          title: "Diet",
+          title: "",
           tabBarIcon: ({ color }) => (
             <FontAwesome6 name="bowl-food" size={24} color={color} />
           ),
         }}
       />
+
       <Tabs.Screen
         name="rewards"
         options={{
           headerShown: false,
           title: "Rewards",
           tabBarIcon: ({ color }) => (
-            <AntDesign name="QQ" size={24} color={color} />
+            <FontAwesome5 name="coins" size={24} color={color} />
           ),
         }}
       />
-      
+    
       <Tabs.Screen
         name="Profile"
         options={{
