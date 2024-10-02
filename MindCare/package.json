@@ -43,6 +43,7 @@
     "react-native-flash-message": "^0.4.2",
     "react-native-gesture-handler": "~2.16.1",
     "react-native-gifted-chat": "^2.4.0",
+    "react-native-markdown-display": "^7.0.2",
     "react-native-reanimated": "~3.10.1",
     "react-native-safe-area-context": "4.10.5",
     "react-native-screens": "3.31.1",
@@ -52,7 +53,29 @@
     "react-redux": "^9.1.2",
     "redux": "^5.0.1",
     "redux-thunk": "^3.1.0",
-    "yup": "^1.4.0"
+    "yup": "^1.4.0",
+    "@aws-amplify/react-native": "^1.0.6",
+    "@aws-amplify/ui-react-native": "^2.0.5",
+    "@expo-google-fonts/amatic-sc": "^0.2.3",
+    "@expo-google-fonts/inter": "^0.2.3",
+    "@gorhom/bottom-sheet": "^4.5.1",
+    "@react-native-community/netinfo": "^11.2.0",
+    "@react-native/metro-config": "^0.73.2",
+    "aws-amplify": "^6.0.6",
+    "dayjs": "^1.11.10",
+
+    "expo-blur": "~12.4.1",
+
+    "expo-local-authentication": "~13.4.1",
+    "expo-location": "~16.1.0",
+
+    "lottie-react-native": "5.1.6",
+
+    "react-native-get-random-values": "^1.10.0",
+    "react-native-maps": "1.7.1",
+  
+    "react-native-url-polyfill": "^2.0.0",
+    "react-native-vision-camera": "^3.6.14"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
@@ -64,6 +87,7 @@
     "jest-expo": "~51.0.3",
     "react-test-renderer": "18.2.0",
     "typescript": "~5.3.3"
+    
   },
   "private": true
 }

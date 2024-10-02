@@ -5,6 +5,7 @@ import ProtectedRoute from "/workspaces/Mindcare-Hackthon/MindCare/components/Pr
 import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
 import Fontisto from '@expo/vector-icons/Fontisto';
 import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
+import Entypo from '@expo/vector-icons/Entypo';
 
 export default function RootLayout() {
   return (
@@ -23,6 +24,7 @@ export default function RootLayout() {
       <Tabs.Screen
         name="BinauralBeats"
         options={{
+          headerShown: false,
           title: "",
           tabBarIcon: ({ color }) => (
             <Fontisto name="heartbeat-alt" size={24} color={color} />
@@ -34,8 +36,20 @@ export default function RootLayout() {
         name="Diet"
         options={{
           title: "",
+          headerShown: false,
           tabBarIcon: ({ color }) => (
             <FontAwesome6 name="bowl-food" size={24} color={color} />
+          ),
+        }}
+      />
+
+<Tabs.Screen
+        name="acupoint"
+        options={{
+          headerShown: false,
+          title: "",
+          tabBarIcon: ({ color }) => (
+            <FontAwesome6 name="feather-pointed" size={24} color={color} />
           ),
         }}
       />
@@ -44,9 +58,9 @@ export default function RootLayout() {
         name="rewards"
         options={{
           headerShown: false,
-          title: "Rewards",
+          title: "",
           tabBarIcon: ({ color }) => (
-            <FontAwesome5 name="coins" size={24} color={color} />
+            <Entypo name="video" size={24} color={color} />
           ),
         }}
       />
@@ -54,7 +68,7 @@ export default function RootLayout() {
       <Tabs.Screen
         name="Profile"
         options={{
-          title: "Profile",
+          title: "",
           tabBarIcon: ({ color }) => (
             <FontAwesome size={28} name="user" color={color} />
           ),

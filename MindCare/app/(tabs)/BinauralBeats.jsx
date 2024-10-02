@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { StyleSheet, Text, View, TouchableOpacity, ScrollView } from 'react-native';
+
 
 function App() {
   const [audioContext, setAudioContext] = useState(null);
@@ -11,7 +13,7 @@ function App() {
 
   // Pomodoro Timer States
   const [isPomodoroActive, setIsPomodoroActive] = useState(false);
-  const [timeLeft, setTimeLeft] = useState(1500); // 25 minutes in seconds
+  const [timeLeft, setTimeLeft] = useState(1); // 25 minutes in seconds
   const [focusLevel, setFocusLevel] = useState(5); // Default focus level
 
   const frequencies = {
@@ -29,7 +31,7 @@ function App() {
     } else if (timeLeft === 0) {
       alert("Pomodoro session complete! Time for a break.");
       setIsPomodoroActive(false);
-      setTimeLeft(1500); // Reset timer
+      setTimeLeft(1); // Reset timer
     }
     return () => clearInterval(timer);
   }, [isPomodoroActive, timeLeft]);
@@ -98,7 +100,7 @@ function App() {
 
   const startPomodoro = () => {
     setIsPomodoroActive(true);
-    setTimeLeft(1500); // Reset to 25 minutes
+    setTimeLeft(1); // Reset to 25 minutes
   };
 
   const handleFocusLevelSubmit = (e) => {
@@ -113,11 +115,22 @@ function App() {
   };
 
   return (
-    <div>
-      <h1>Binaural Beats for Mental Health</h1>
-      <div>
+    <ScrollView>
+    <div style={{
+      minHeight: '100vh',
+      background: 'linear-gradient(to right, #800080, #0000FF)', // Purple to Blue Gradient
+      color: '#fff',
+      padding: '20px',
+      fontFamily: 'Arial, sans-serif',
+    }}>
+      <h1 style={{ textAlign: 'center', marginBottom: '30px' }}>Binaural Beats for Mental Health</h1>
+      <div style={{ marginBottom: '20px' }}>
         <label>Select Frequency for Purpose:</label>
-        <select value={selectedFrequency} onChange={(e) => setSelectedFrequency(e.target.value)}>
+        <select 
+          value={selectedFrequency} 
+          onChange={(e) => setSelectedFrequency(e.target.value)} 
+          style={{ margin: '0 10px', padding: '5px' }}
+        >
           <option value="adhd">ADHD (Gamma 40 Hz)</option>
           <option value="focus">Focus (Beta 20 Hz)</option>
           <option value="relax">Relaxation (Alpha 10 Hz)</option>
@@ -125,117 +138,167 @@ function App() {
           <option value="sleep">Deep Sleep (Delta 3 Hz)</option>
         </select>
       </div>
-      <div>
-        <button onClick={startBinauralBeats} disabled={isPlaying}>
+      <div style={{ marginBottom: '20px' }}>
+        <button 
+          onClick={startBinauralBeats} 
+          disabled={isPlaying}
+          style={{
+            backgroundColor: isPlaying ? '#555' : '#4CAF50',
+            color: 'white',
+            padding: '10px 20px',
+            margin: '5px',
+            border: 'none',
+            borderRadius: '5px',
+            cursor: isPlaying ? 'not-allowed' : 'pointer'
+          }}
+        >
           Start Binaural Beats
         </button>
-        <button onClick={stopBinauralBeats} disabled={!isPlaying}>
+        <button 
+          onClick={stopBinauralBeats} 
+          disabled={!isPlaying}
+          style={{
+            backgroundColor: !isPlaying ? '#555' : '#f44336',
+            color: 'white',
+            padding: '10px 20px',
+            margin: '5px',
+            border: 'none',
+            borderRadius: '5px',
+            cursor: !isPlaying ? 'not-allowed' : 'pointer'
+          }}
+        >
           Stop Binaural Beats
         </button>
       </div>
 
       {/* Pomodoro Timer */}
-      <div>
+      <div style={{ marginBottom: '20px' }}>
         <h2>Pomodoro Timer</h2>
         <div>
           {isPomodoroActive ? (
-            <h3>Time Left: {Math.floor(timeLeft / 60)}:{('0' + (timeLeft % 60)).slice(-2)}</h3>
+            <h3>
+              Time Left: {Math.floor(timeLeft / 60)}:{('0' + (timeLeft % 60)).slice(-2)}
+            </h3>
           ) : (
-            <button onClick={startPomodoro}>Start Pomodoro (25 minutes)</button>
+            <button onClick={startPomodoro} style={{
+              backgroundColor: '#4CAF50',
+              color: 'white',
+              padding: '10px 20px',
+              border: 'none',
+              borderRadius: '5px',
+              cursor: 'pointer'
+            }}>
+              Start Pomodoro (25 minutes)
+            </button>
           )}
         </div>
       </div>
 
-      {/* Feedback Form */}
-      {showFeedback && (
-        <div>
-          <h2>How do you feel after the session?</h2>
-          <form onSubmit={handleFeedbackSubmit}>
+      {/* Scrollable Container for Feedback and Logs */}
+      <div style={{ maxHeight: '400px', overflowY: 'auto', border: '1px solid #fff', borderRadius: '5px', padding: '10px' }}>
+        
+        {/* Feedback Form */}
+        {showFeedback && (
+          <div style={{ marginBottom: '20px' }}>
+            <h2>How do you feel after the session?</h2>
+            <form onSubmit={handleFeedbackSubmit}>
+              <div>
+                <label>Relaxation Level (1-10):</label>
+                <input type="number" name="relaxation" min="1" max="10" required style={{ margin: '0 10px' }} />
+              </div>
+              <div>
+                <label>Focus Level (1-10):</label>
+                <input type="number" name="focus" min="1" max="10" required style={{ margin: '0 10px' }} />
+              </div>
+              <div>
+                <label>Sleep Quality (1-10):</label>
+                <input type="number" name="sleep" min="1" max="10" required style={{ margin: '0 10px' }} />
+              </div>
+              <button type="submit" style={{
+                backgroundColor: '#4CAF50',
+                color: 'white',
+                padding: '10px 20px',
+                border: 'none',
+                borderRadius: '5px',
+                cursor: 'pointer'
+              }}>Submit Feedback</button>
+            </form>
+          </div>
+        )}
+
+        {/* Mood Tracking Form */}
+        <div style={{ marginBottom: '20px' }}>
+          <h2>Track Your Mood</h2>
+          <form onSubmit={handleProgressSubmit}>
             <div>
-              <label>Relaxation Level (1-10):</label>
-              <input type="number" name="relaxation" min="1" max="10" required />
+              <label>Mood (1-10):</label>
+              <input
+                type="number"
+                value={mood}
+                onChange={(e) => setMood(e.target.value)}
+                min="1"
+                max="10"
+                required
+                style={{ margin: '0 10px' }}
+              />
             </div>
-            <div>
-              <label>Focus Level (1-10):</label>
-              <input type="number" name="focus" min="1" max="10" required />
-            </div>
-            <div>
-              <label>Sleep Quality (1-10):</label>
-              <input type="number" name="sleep" min="1" max="10" required />
-            </div>
-            <button type="submit">Submit Feedback</button>
+            <button type="submit" style={{
+              backgroundColor: '#4CAF50',
+              color: 'white',
+              padding: '10px 20px',
+              border: 'none',
+              borderRadius: '5px',
+              cursor: 'pointer'
+            }}>Log Mood</button>
           </form>
         </div>
-      )}
 
-      {/* Mood Tracking Form */}
-      <div>
-        <h2>Track Your Mood</h2>
-        <form onSubmit={handleProgressSubmit}>
-          <div>
-            <label>Mood Level (1-10):</label>
-            <input
-              type="number"
-              value={mood}
-              onChange={(e) => setMood(e.target.value)}
-              min="1"
-              max="10"
-              required
-            />
-          </div>
-          <button type="submit">Log Mood</button>
-        </form>
-      </div>
-
-      {/* Focus Level Tracking Form */}
-      <div>
-        <h2>Log Your Focus Level</h2>
-        <form onSubmit={handleFocusLevelSubmit}>
-          <div>
-            <label>Focus Level (1-10):</label>
-            <input
-              type="number"
-              value={focusLevel}
-              onChange={(e) => setFocusLevel(e.target.value)}
-              min="1"
-              max="10"
-              required
-            />
-          </div>
-          <button type="submit">Log Focus</button>
-        </form>
-      </div>
-
-      {/* Display feedback history */}
-      {feedback.length > 0 && (
-        <div>
-          <h2>Feedback History</h2>
-          <ul>
-            {feedback.map((entry, index) => (
-              <li key={index}>
-                Relaxation: {entry.relaxation}, Focus: {entry.focus}, Sleep: {entry.sleep}
-              </li>
-            ))}
-          </ul>
+        {/* Focus Level Tracking */}
+        <div style={{ marginBottom: '20px' }}>
+          <h2>Log Focus Level</h2>
+          <form onSubmit={handleFocusLevelSubmit}>
+            <div>
+              <label>Focus Level (1-10):</label>
+              <input
+                type="number"
+                value={focusLevel}
+                onChange={(e) => setFocusLevel(e.target.value)}
+                min="1"
+                max="10"
+                required
+                style={{ margin: '0 10px' }}
+              />
+            </div>
+            <button type="submit" style={{
+              backgroundColor: '#4CAF50',
+              color: 'white',
+              padding: '10px 20px',
+              border: 'none',
+              borderRadius: '5px',
+              cursor: 'pointer'
+            }}>Log Focus</button>
+          </form>
         </div>
-      )}
 
-      {/* Display progress log */}
-      {progressLog.length > 0 && (
+        {/* Progress Logs */}
         <div>
-          <h2>Progress Log</h2>
-          <ul>
-            {progressLog.map((entry, index) => (
-              <li key={index}>
-                Mood: {entry.mood} on {entry.date}
-              </li>
-            ))}
-          </ul>
+          <h2>Progress Logs</h2>
+          {progressLog.length === 0 ? (
+            <p>No logs available.</p>
+          ) : (
+            <ul>
+              {progressLog.map((log, index) => (
+                <li key={index}>
+                  Date: {log.date}, Mood: {log.mood}, Focus: {log.focus || 'N/A'}
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
-      )}
+      </div>
     </div>
+    </ScrollView>
   );
 }
 
 export default App;
-``

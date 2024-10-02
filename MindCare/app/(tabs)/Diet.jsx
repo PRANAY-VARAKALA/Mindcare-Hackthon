@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, ScrollView } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient'; // Importing LinearGradient from expo
 
 const symptomsData = [
   { title: 'Brain Fog' },
@@ -136,14 +137,17 @@ const App = () => {
   const [selectedSymptom, setSelectedSymptom] = useState(null);
 
   return (
-    <View style={styles.container}>
+    <LinearGradient 
+      colors={['#6a11cb', '#2575fc']} // Purple to Blue gradient
+      style={styles.container}
+    >
       <Text style={styles.title}>Mental Health Issues</Text>
       <ScrollView>
         {symptomsData.map((symptom, index) => (
           <View key={index}>
             <TouchableOpacity
               style={styles.card}
-              onPress={() => 
+              onPress={() =>
                 setSelectedSymptom(selectedSymptom === symptom.title ? null : symptom.title)
               }
             >
@@ -166,7 +170,7 @@ const App = () => {
           </View>
         ))}
       </ScrollView>
-    </View>
+    </LinearGradient>
   );
 };
 
@@ -174,13 +178,13 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 20,
-    backgroundColor: '#f5f5f5',
   },
   title: {
     fontSize: 24,
     fontWeight: 'bold',
     marginBottom: 20,
     textAlign: 'center',
+    color: '#ffffff', // Change text color for visibility
   },
   card: {
     backgroundColor: '#fff',
